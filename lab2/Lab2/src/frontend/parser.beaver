@@ -13,17 +13,18 @@
 	}
 :};
 
+
 // the list of all terminals; no need to change this
 %terminals MODULE, INT, VOID, IF, ELSE, WHILE, RETURN, BREAK, BOOLEAN, PUBLIC, TRUE, FALSE,
            INT_LITERAL, STRING_LITERAL, ID, TYPE, IMPORT,
-           PLUS, MINUS, TIMES, DIV, MOD, EQEQ, NEQ, LEQ, GEQ, LT, GT,EQL;
+           PLUS, MINUS, TIMES, DIV, MOD, EQEQ, NEQ, LEQ, GEQ, LT, GT,
+           LBRACKET, RPAREN, COMMA, RCURLY, LCURLY, SEMICOLON, RBRACKET, LPAREN, EQL;
 
-                                                                     // declaration of start symbol; no need to change this
-                                                                     %goal Module;
+// declaration of start symbol; no need to change this
+%goal Module;
 
-                                                                     // temporary declaration, you can remove this once you have written all other rules
-                                                                     %goal Dummy;
-           LBRACKET, RPAREN, COMMA, RCURLY, LCURLY, SEMICOLON, RBRACKET, LPAREN,
+// temporary declaration, you can remove this once you have written all other rules
+%goal Dummy;
 
 /* TODO: Flesh out the rule for Module, and add rules for other nonterminals. Here is an example
          of a rule you may want to add:
@@ -33,7 +34,142 @@
 		  ;
   */
 
-Module = ;
+Module =  MODULE ID LCURLY Import Declaration RCURLY ;
+
+Import =  IMPORT ID SEMICOLON Import
+	   |
+	   ;
+
+Declaration = 	Func Declaration
+            |	Field Declaration
+            |	Type Declaration
+            |
+            ;
+
+Func =  AccSpec TypeName ID LPAREN ParameterList RPAREN LCURLY StatementList RCURLY ;
+Field = AccSpec TypeName ID SEMICOLON;
+Type = AccSpec TYPE ID EQL STRING_LITERAL SEMICOLON;
+
+AccSpec =  PUBLIC
+        |
+        ;
+
+TypeName =  PrimType
+		 |  ArrayType
+	     |  ID
+	     ;
+
+PrimType =  VOID
+		 |  BOOLEAN
+		 |  INT
+		 ;
+
+// ArrayType = TypeName LBRACKET RBRACKET 			 WRONG!
+
+ArrayType =  ID LBRACKET RBRACKET
+          |  PrimType LBRACKET RBRACKET
+          |  ArrayType LBRACKET RBRACKET
+          ;
+
+ParameterList =  PListHelper
+              |
+              ;
+
+PListHelper = Parameter COMMA PListHelper
+            | Parameter
+             ;
+
+Parameter = TypeName ID ;
+
+StatementList = Statement StatementList
+              |
+              ;
+
+Statement = 	LocalVar
+			| 	StmtBlock
+			|	StmtIf
+			|	StmtWhile
+			|	StmtBreak
+			|	StmtReturn
+			|	StmtExpr
+			;
+
+LocalVar = TypeName ID SEMICOLON ;
+
+StmtBlock = LCURLY StatementList RCURLY ;
+
+StmtIf = 	IF LPAREN Expr RPAREN Statement ELSE Statement
+		 |	IF LPAREN Expr RPAREN Statement
+		 ;
+
+StmtWhile = WHILE LPAREN Expr RPAREN Statement ;
+
+StmtBreak = BREAK SEMICOLON ;
+
+StmtReturn = RETURN OptExpr SEMICOLON ;
+OptExpr = Expr
+        |
+        ;
+
+StmtExpr = Expr SEMICOLON ;
+
+Expr =  Assignment
+	 |  RHSExpr
+	 ;
+
+Assignment = LHSExpr EQL Expr ;
+
+LHSExpr = ID
+        | ArrayAcc
+        ;
+
+/*ArrayAcc = LHSExpr LBRACKET Expr RBRACKET;*/
+ArrayAcc = ID LBRACKET Expr RBRACKET
+        |   ArrayAcc LBRACKET Expr RBRACKET
+         ;
+
+RHSExpr = ArithExpr OptCompare ;
+OptCompare  = Compare ArithExpr
+            |
+            ;
+Compare = EQEQ | NEQ | LEQ | GEQ | LT | GT ;
+ArithExpr = Term ArithHelper ;
+ArithHelper = AddOperator ArithExpr
+            |
+            ;
+AddOperator = PLUS
+            | MINUS
+            ;
+Term = Factor TermHelper ;
+TermHelper = MulOperator Term
+           |
+           ;
+MulOperator = TIMES | DIV | MOD ;
+
+Factor = MINUS Factor
+       | PrimExpr
+       ;
+
+PrimExpr = 		LHSExpr
+			|	FuncCall
+			| 	ArrayExpr
+			| 	STRING_LITERAL
+			|	INT_LITERAL
+			|	TRUE
+			|	FALSE
+			|	LPAREN Expr RPAREN ;
+
+FuncCall = ID LPAREN NonEmptyExpressionList RPAREN ;
+
+NonEmptyExpressionList = ExpressionList
+                       |
+                       ;
+ExpressionList = Expr ExprListTail ;
+ExprListTail = COMMA ExprListTail
+             |
+             ;
+
+ArrayExpr = LBRACKET ExpressionList RBRACKET ;
 
 /**/
 

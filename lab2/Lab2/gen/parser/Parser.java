@@ -11,58 +11,119 @@ import java.util.ArrayList;
 public class Parser extends beaver.Parser {
 	static public class Terminals {
 		static public final short EOF = 0;
-		static public final short MODULE = 1;
-		static public final short INT = 2;
-		static public final short VOID = 3;
-		static public final short IF = 4;
-		static public final short ELSE = 5;
-		static public final short WHILE = 6;
-		static public final short RETURN = 7;
-		static public final short BREAK = 8;
-		static public final short BOOLEAN = 9;
-		static public final short PUBLIC = 10;
-		static public final short TRUE = 11;
-		static public final short FALSE = 12;
-		static public final short INT_LITERAL = 13;
-		static public final short STRING_LITERAL = 14;
-		static public final short ID = 15;
-		static public final short TYPE = 16;
-		static public final short IMPORT = 17;
-		static public final short PLUS = 18;
-		static public final short MINUS = 19;
-		static public final short TIMES = 20;
-		static public final short DIV = 21;
-		static public final short MOD = 22;
-		static public final short EQEQ = 23;
-		static public final short NEQ = 24;
-		static public final short LEQ = 25;
-		static public final short GEQ = 26;
-		static public final short LT = 27;
-		static public final short GT = 28;
-		static public final short LBRACKET = 29;
-		static public final short RPAREN = 30;
-		static public final short COMMA = 31;
-		static public final short RCURLY = 32;
-		static public final short LCURLY = 33;
-		static public final short SEMICOLON = 34;
-		static public final short RBRACKET = 35;
-		static public final short LPAREN = 36;
-		static public final short EQL = 37;
+		static public final short ID = 1;
+		static public final short LBRACKET = 2;
+		static public final short LPAREN = 3;
+		static public final short STRING_LITERAL = 4;
+		static public final short MINUS = 5;
+		static public final short TRUE = 6;
+		static public final short FALSE = 7;
+		static public final short INT_LITERAL = 8;
+		static public final short RCURLY = 9;
+		static public final short RPAREN = 10;
+		static public final short INT = 11;
+		static public final short VOID = 12;
+		static public final short BOOLEAN = 13;
+		static public final short SEMICOLON = 14;
+		static public final short LCURLY = 15;
+		static public final short RBRACKET = 16;
+		static public final short IF = 17;
+		static public final short WHILE = 18;
+		static public final short RETURN = 19;
+		static public final short BREAK = 20;
+		static public final short PUBLIC = 21;
+		static public final short COMMA = 22;
+		static public final short IMPORT = 23;
+		static public final short EQL = 24;
+		static public final short MODULE = 25;
+		static public final short ELSE = 26;
+		static public final short TYPE = 27;
+		static public final short PLUS = 28;
+		static public final short TIMES = 29;
+		static public final short DIV = 30;
+		static public final short MOD = 31;
+		static public final short EQEQ = 32;
+		static public final short NEQ = 33;
+		static public final short LEQ = 34;
+		static public final short GEQ = 35;
+		static public final short LT = 36;
+		static public final short GT = 37;
 	}
 	static public class AltGoals {
 		static public final short Dummy = 38;
 	}
 
 	static final ParsingTables PARSING_TABLES = new ParsingTables(
-		"U9pDaMjIma0GX9iG7aaWyWWGGH04aN0DB#OvhV8Qlc7zPWoUmQtwfZlxOwhJA#and1I54Bx" +
-		"KKXpEQgkhdZeQQAH44wKgbMcXfVfQAzTMLzhheA7iZCEt2dTJcAd9l8QvtztuNC6jkmtSkT" +
-		"l1lRi7drNjAZNOBKMAoT4aIKwk8QaACitOdR0rPL$6fftw90yaaWRkHZ3MdZc1gT#LFkUmS" +
-		"BU4bRirRDnjVLgYuvF#JWJsHsreGGTYw482AJGWWnxyff5ov8nUSfrGwujqz4LhK7ZdifpX" +
-		"yz8V$WCjhKNyUzsavNwpFj5NT6cDMaw#dsjzCVsFr2VsjwterDxvGDV77ypMWum=");
+		"U9pDbmTy54KKnh#zX60I2BqJYXW8aT09X18Wb10YKaHw4ImeIEz5UfTUH15iz19wXu0DL2o" +
+		"81SK6Y80LbIgeFB#TUrpEAoaeFztz$NVclVdUlDcvtTavm96CxXYFtXY8mHY2n$0mbk01T4" +
+		"CJF8SNKHVr4Oy6Q8X6Q8m4nA0yAg8ogg9E9kCgQLozJCPLqRXxqenhvH6NbhPr9hJjFRJBC" +
+		"HaZCHJzCHmZC4o#XWDhi0ghPHcIH70lxaSdTF2Xo#BK8P2w6sdeWbIN5Kc8ygT30EvGNJ1r" +
+		"8NvrZw27waAfo#PNrnEzL9UTkZ2NpdDkffcvyVHsDTxH7dtsGL$CmHZCb0ymo2sY7sPvQNE" +
+		"WSmPpjV2PAwUimHGlRLkVFJpaqplAftUiJ#$4DBIU8tiAY$0qdi5YF8jSMEdLdfuzw6zP7a" +
+		"sd$V5CzvzPUuDvB#oi0pHh3AhfExf9MzTXBUkvKLEkwbEr2NdadDRN8Hcxi52jhQXkOkPY7" +
+		"kRBprZ1v#MgVI8VOkLNF2#$u2Kia3F8ooZxt4BLPkH70HH6KQn7GPH08PJ4dRWBHL0A4GX7" +
+		"98gXDCgWB8hBSfJ3tOX61VaJk#MwN4CD9Cflg8rQQ8uuEOqsQ8fck0$JqHBjC0CJi0$sqH5" +
+		"Tv4CymTf6ZCCaJCLiMOkbyYqUn0jo5jlm9Czbs86T$6NtO2#s8$NOpVoH744KivTZ$lAem7" +
+		"cgn9cgmhcgndchpf74eYR7KPlhQHnNltfclVa$nzqkhSMLD82hOnQkW5cvkWNpjmdbYfMTl" +
+		"qiEpcOkFazv#0nuwmgfhaKwkb3LPQEka5zTQROuTOMfo#rNbyXdngdBGrrUlxeaVhcSkkpK" +
+		"vNFfVC#DRwzddysuFYSONvX7H2ilRH2VwN#IAok$BWcPwk5sUJr7LiAyywNuraVGokdLdfx" +
+		"jcIMpxV#sxNmltBEclgEMjjhx48inJSppR3zL5iyGhTkj#TYVqogYCU5S2ujhjc1p5c3Djc" +
+		"sAChe8e#mpJ3rPg2$95JQSCrkCdX36bA2TW$CTm1aFusmNvBo37ekxes3M2fYUxT44qnkYk" +
+		"UmdD9XlKcDwGdXre87meDS#GrYps9Tzsktqi5#xRZ5RVjO2JIwBruBYEfWBI1dhN6MtaHLa" +
+		"iLbnOLRk0#GmEKYEa9Fa5BbEBW5MRTAH90EEI5APn99gf2vfIngGXYIED2PrI09fGf88#t1" +
+		"q8nr8IzA9j2TTI6VIWxGX$KX$qfrq9H6a5nbCwf4#f3xfI#B90CAPTGmZJKaK6KXwS#mBMG" +
+		"xH#rx3#b2xxW#s3oU3L9$2#WZrZ#Izs$SxYiPHbZrPdj6sqMpRmTB#wbrJtnXdQPLYVQpwn" +
+		"hdb6S#s$QgPhUKXROjH#vZQfTK#g#NvjEuXDOTrXR6JjHvDRj2Ue7rE8K5aejfXP9BMfsev" +
+		"JMFjtsY6#cPc9BVRVKxNiXbvKklDoHojDsB$Att4pIQ9f1APH#QglnsPh$KbP1PPIXQunIu" +
+		"ZYyZ2L1zQQDaZC#F$B#2uA$A5FNxJPlsoZZsNixHEgouiDSOwuwRtYiruRcSEjtuZrH#jPG" +
+		"EtjZZrjVVeuuB$$gr4rQnGUxNQEzNUfVO9jKErl9YnyLkjFUok7dPFjtfuQjrHLyjupNyk8" +
+		"$bk5UOUd4RRfLllrv6Wuq$1RJhaTxbWoWkfU6ckcEifEIadv2lvKhwGputdCtCzxj9zGZvr" +
+		"MSV8nwRs4NbVZiXMbk$96$8MopTblxpCye3ibhqizv3jiassoXRPB9jaesoGP1EzNjurvTl" +
+		"oZYaFc#iAMIchoIfZhIExPAVia1JP9uVaeBmkhychyWhzHutYUtFzpkvBVf3pyfFyw7Q7tv" +
+		"ZhPPTzIIxgxFp1eXDtu1PnS4SUnAzz805t9Wutm7rAC7SgWToh177VOX5m$s6vgE96LUuBR" +
+		"jA4Dh#ftBa4cBrDG$ONRm3$8rX#YQ6#Egd1lLCDxbXYIKt6rQAl9TlvJUQ$2WVtZfQX8lrb" +
+		"MDf4SfmsbTYUQ01tyvPFohCzoG3kv2r3DErc1d0dRhaeIrzPbb5f4i2zNQ3PgRTYlBsFRsm" +
+		"0Ttm1$1SJWTP$0SI04WC=");
 
 	static final Action RETURN2 = new Action() {
 		public Symbol reduce(Symbol[] _symbols, int offset) {
 			return _symbols[offset + 2];
+		}
+	};
+
+	static final Action RETURN6 = new Action() {
+		public Symbol reduce(Symbol[] _symbols, int offset) {
+			return _symbols[offset + 6];
+		}
+	};
+
+	static final Action RETURN4 = new Action() {
+		public Symbol reduce(Symbol[] _symbols, int offset) {
+			return _symbols[offset + 4];
+		}
+	};
+
+	static final Action RETURN9 = new Action() {
+		public Symbol reduce(Symbol[] _symbols, int offset) {
+			return _symbols[offset + 9];
+		}
+	};
+
+	static final Action RETURN3 = new Action() {
+		public Symbol reduce(Symbol[] _symbols, int offset) {
+			return _symbols[offset + 3];
+		}
+	};
+
+	static final Action RETURN7 = new Action() {
+		public Symbol reduce(Symbol[] _symbols, int offset) {
+			return _symbols[offset + 7];
+		}
+	};
+
+	static final Action RETURN5 = new Action() {
+		public Symbol reduce(Symbol[] _symbols, int offset) {
+			return _symbols[offset + 5];
 		}
 	};
 
@@ -85,8 +146,96 @@ public class Parser extends beaver.Parser {
 		actions = new Action[] {
 			Action.RETURN,	// [0] $goal = Module
 			RETURN2,	// [1] $goal = $Dummy Dummy; returns 'Dummy' although none is marked
-			Action.NONE,  	// [2] Module = 
-			RETURN37	// [3] Dummy = MODULE INT VOID IF ELSE WHILE RETURN BREAK BOOLEAN PUBLIC TRUE FALSE INT_LITERAL STRING_LITERAL ID TYPE IMPORT PLUS MINUS TIMES DIV MOD EQEQ NEQ LEQ GEQ LT GT LBRACKET RPAREN COMMA RCURLY LCURLY SEMICOLON RBRACKET LPAREN EQL; returns 'EQL' although none is marked
+			RETURN6,	// [2] Module = MODULE ID LCURLY Import Declaration RCURLY; returns 'RCURLY' although none is marked
+			RETURN4,	// [3] Import = IMPORT ID SEMICOLON Import; returns 'Import' although none is marked
+			Action.NONE,  	// [4] Import = 
+			RETURN2,	// [5] Declaration = Func Declaration; returns 'Declaration' although none is marked
+			RETURN2,	// [6] Declaration = Field Declaration; returns 'Declaration' although none is marked
+			RETURN2,	// [7] Declaration = Type Declaration; returns 'Declaration' although none is marked
+			Action.NONE,  	// [8] Declaration = 
+			RETURN9,	// [9] Func = AccSpec TypeName ID LPAREN ParameterList RPAREN LCURLY StatementList RCURLY; returns 'RCURLY' although none is marked
+			RETURN4,	// [10] Field = AccSpec TypeName ID SEMICOLON; returns 'SEMICOLON' although none is marked
+			RETURN6,	// [11] Type = AccSpec TYPE ID EQL STRING_LITERAL SEMICOLON; returns 'SEMICOLON' although none is marked
+			Action.RETURN,	// [12] AccSpec = PUBLIC
+			Action.NONE,  	// [13] AccSpec = 
+			Action.RETURN,	// [14] TypeName = PrimType
+			Action.RETURN,	// [15] TypeName = ArrayType
+			Action.RETURN,	// [16] TypeName = ID
+			Action.RETURN,	// [17] PrimType = VOID
+			Action.RETURN,	// [18] PrimType = BOOLEAN
+			Action.RETURN,	// [19] PrimType = INT
+			RETURN3,	// [20] ArrayType = ID LBRACKET RBRACKET; returns 'RBRACKET' although none is marked
+			RETURN3,	// [21] ArrayType = PrimType LBRACKET RBRACKET; returns 'RBRACKET' although none is marked
+			RETURN3,	// [22] ArrayType = ArrayType LBRACKET RBRACKET; returns 'RBRACKET' although none is marked
+			Action.RETURN,	// [23] ParameterList = PListHelper
+			Action.NONE,  	// [24] ParameterList = 
+			RETURN3,	// [25] PListHelper = Parameter COMMA PListHelper; returns 'PListHelper' although none is marked
+			Action.RETURN,	// [26] PListHelper = Parameter
+			RETURN2,	// [27] Parameter = TypeName ID; returns 'ID' although none is marked
+			RETURN2,	// [28] StatementList = Statement StatementList; returns 'StatementList' although none is marked
+			Action.NONE,  	// [29] StatementList = 
+			Action.RETURN,	// [30] Statement = LocalVar
+			Action.RETURN,	// [31] Statement = StmtBlock
+			Action.RETURN,	// [32] Statement = StmtIf
+			Action.RETURN,	// [33] Statement = StmtWhile
+			Action.RETURN,	// [34] Statement = StmtBreak
+			Action.RETURN,	// [35] Statement = StmtReturn
+			Action.RETURN,	// [36] Statement = StmtExpr
+			RETURN3,	// [37] LocalVar = TypeName ID SEMICOLON; returns 'SEMICOLON' although none is marked
+			RETURN3,	// [38] StmtBlock = LCURLY StatementList RCURLY; returns 'RCURLY' although none is marked
+			RETURN7,	// [39] StmtIf = IF LPAREN Expr RPAREN Statement ELSE Statement; returns 'Statement' although none is marked
+			RETURN5,	// [40] StmtIf = IF LPAREN Expr RPAREN Statement; returns 'Statement' although none is marked
+			RETURN5,	// [41] StmtWhile = WHILE LPAREN Expr RPAREN Statement; returns 'Statement' although none is marked
+			RETURN2,	// [42] StmtBreak = BREAK SEMICOLON; returns 'SEMICOLON' although none is marked
+			RETURN3,	// [43] StmtReturn = RETURN OptExpr SEMICOLON; returns 'SEMICOLON' although none is marked
+			Action.RETURN,	// [44] OptExpr = Expr
+			Action.NONE,  	// [45] OptExpr = 
+			RETURN2,	// [46] StmtExpr = Expr SEMICOLON; returns 'SEMICOLON' although none is marked
+			Action.RETURN,	// [47] Expr = Assignment
+			Action.RETURN,	// [48] Expr = RHSExpr
+			RETURN3,	// [49] Assignment = LHSExpr EQL Expr; returns 'Expr' although none is marked
+			Action.RETURN,	// [50] LHSExpr = ID
+			Action.RETURN,	// [51] LHSExpr = ArrayAcc
+			RETURN4,	// [52] ArrayAcc = ID LBRACKET Expr RBRACKET; returns 'RBRACKET' although none is marked
+			RETURN4,	// [53] ArrayAcc = ArrayAcc LBRACKET Expr RBRACKET; returns 'RBRACKET' although none is marked
+			RETURN2,	// [54] RHSExpr = ArithExpr OptCompare; returns 'OptCompare' although none is marked
+			RETURN2,	// [55] OptCompare = Compare ArithExpr; returns 'ArithExpr' although none is marked
+			Action.NONE,  	// [56] OptCompare = 
+			Action.RETURN,	// [57] Compare = EQEQ
+			Action.RETURN,	// [58] Compare = NEQ
+			Action.RETURN,	// [59] Compare = LEQ
+			Action.RETURN,	// [60] Compare = GEQ
+			Action.RETURN,	// [61] Compare = LT
+			Action.RETURN,	// [62] Compare = GT
+			RETURN2,	// [63] ArithExpr = Term ArithHelper; returns 'ArithHelper' although none is marked
+			RETURN2,	// [64] ArithHelper = AddOperator ArithExpr; returns 'ArithExpr' although none is marked
+			Action.NONE,  	// [65] ArithHelper = 
+			Action.RETURN,	// [66] AddOperator = PLUS
+			Action.RETURN,	// [67] AddOperator = MINUS
+			RETURN2,	// [68] Term = Factor TermHelper; returns 'TermHelper' although none is marked
+			RETURN2,	// [69] TermHelper = MulOperator Term; returns 'Term' although none is marked
+			Action.NONE,  	// [70] TermHelper = 
+			Action.RETURN,	// [71] MulOperator = TIMES
+			Action.RETURN,	// [72] MulOperator = DIV
+			Action.RETURN,	// [73] MulOperator = MOD
+			RETURN2,	// [74] Factor = MINUS Factor; returns 'Factor' although none is marked
+			Action.RETURN,	// [75] Factor = PrimExpr
+			Action.RETURN,	// [76] PrimExpr = LHSExpr
+			Action.RETURN,	// [77] PrimExpr = FuncCall
+			Action.RETURN,	// [78] PrimExpr = ArrayExpr
+			Action.RETURN,	// [79] PrimExpr = STRING_LITERAL
+			Action.RETURN,	// [80] PrimExpr = INT_LITERAL
+			Action.RETURN,	// [81] PrimExpr = TRUE
+			Action.RETURN,	// [82] PrimExpr = FALSE
+			RETURN3,	// [83] PrimExpr = LPAREN Expr RPAREN; returns 'RPAREN' although none is marked
+			RETURN4,	// [84] FuncCall = ID LPAREN NonEmptyExpressionList RPAREN; returns 'RPAREN' although none is marked
+			Action.RETURN,	// [85] NonEmptyExpressionList = ExpressionList
+			Action.NONE,  	// [86] NonEmptyExpressionList = 
+			RETURN2,	// [87] ExpressionList = Expr ExprListTail; returns 'ExprListTail' although none is marked
+			RETURN2,	// [88] ExprListTail = COMMA ExprListTail; returns 'ExprListTail' although none is marked
+			Action.NONE,  	// [89] ExprListTail = 
+			RETURN3,	// [90] ArrayExpr = LBRACKET ExpressionList RBRACKET; returns 'RBRACKET' although none is marked
+			RETURN37	// [91] Dummy = MODULE INT VOID IF ELSE WHILE RETURN BREAK BOOLEAN PUBLIC TRUE FALSE INT_LITERAL STRING_LITERAL ID TYPE IMPORT PLUS MINUS TIMES DIV MOD EQEQ NEQ LEQ GEQ LT GT LBRACKET RPAREN COMMA RCURLY LCURLY SEMICOLON RBRACKET LPAREN EQL; returns 'EQL' although none is marked
 		};
 	}
 
